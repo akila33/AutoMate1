@@ -2,10 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, Nav } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { AlertController } from 'ionic-angular';
-import { DashboardPage } from '../dashboard/dashboard';
 import { EmergencyServiceProvider } from '../services/emergency-service';
 import { AuthService } from '../../pages/services/auth.service';
-import { Geolocation, PositionError, Geoposition } from '@ionic-native/geolocation';
+import { Geolocation,  Geoposition } from '@ionic-native/geolocation';
 
 import { AppointmentServiceProvider } from '../services/appointment-service';
 import { ProblemsServiceProvider } from '../../providers/problems-service/problems-service';
@@ -39,6 +38,9 @@ export class EmergencyPage {
 
   appointment;
   appointmentLoad:boolean = false;
+  latitute;
+  longitude;
+  //serviceCenters :any = [];
 
   constructor(public navCtrl: NavController,private appointmentServiceProvider:AppointmentServiceProvider, public navParams: NavParams,
      private alertCtrl: AlertController, private geolocation: Geolocation,
@@ -58,8 +60,8 @@ export class EmergencyPage {
       this.loadProblems();
      
     this.geolocation.getCurrentPosition().then((resp) => {
-      // resp.coords.latitude
-      // resp.coords.longitude
+      this.latitute = resp.coords.latitude;
+      this.longitude =resp.coords.longitude;
 
     
 
@@ -120,10 +122,12 @@ export class EmergencyPage {
 
   }
 onChange(){
+  console.log("ok");
  this.clickService();
 }
 
 presentConfirm(value) {
+  let currentUser = firebase.auth().currentUser;
   let alert = this.alertCtrl.create({
     title: 'Confirm request',
     message: 'Request service?',
@@ -153,6 +157,9 @@ presentConfirm(value) {
             "time":time,
             "centerEmail":value.email,
             "userEmail":this.auth.getEmail(),
+            "centerphone":value.phno,
+            "userlocation":this.latitute+","+this.longitude,
+            "centerlocation":value.latitude+","+value.longitude,
             "isEmergency": 1
             }
 
@@ -178,43 +185,17 @@ presentConfirm(value) {
   alert.present();
 }
 
-//   loadData(data){
-//     this.isDataLoad = false;
-//     console.log(data);
-//     let now = new Date();
-//     let date = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
-//     let time =  now.getHours()+":"+now.getMinutes();
-    
-//     let appointment ={
-//       "centerName": data.name,
-//       "date": date,
-//       "serviceType": this.service,
-//       "time":time,
-//       "centerEmail":data.email,
-//       "userEmail":this.auth.getEmail()
-//       }
-
-//       this.appointmentServiceProvider.createAppointment(appointment).subscribe(
-//         resultData => {
-          
-//          console.log(resultData);
-//     //     this.goToDashboard();
-//          }, errordata => {
-//          }
-      
-//        );
-
-//     this.isClicked = true;
-//     this.name = data.name;
-// }
-
 
 closeDiv(){
   this.isClicked = false;
   this.isDataLoad = true;
 }
 
-  goToMaps(){
+  goToMaps(value){
+   // console.log(value);
+   
+    localStorage.setItem('dimensions', JSON.stringify({ latitude: value.latitude,longitude: value.longitude }));
+           
     this.navCtrl.push(MapPage);
   }
 

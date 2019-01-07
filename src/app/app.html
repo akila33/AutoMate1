@@ -19,12 +19,12 @@
 
 <ion-menu id="leftMenu" [content]="content" type="overlay">
 	<ion-header>
-		<ion-toolbar color="primary">
+		<ion-toolbar color="dark" >
 			<ion-title>Pages</ion-title>
 		</ion-toolbar>
 	</ion-header>
 
-<ion-content class="getting-started">
+<ion-content class="getting-started" style="background-color:rgb(17, 20, 20)">
 	<ion-list >
 		<ion-item class="item item-trns text-center" *ngFor="let p of pages" (click)="openPage(p)">
 			<ion-icon [name]="p.icon" item-left></ion-icon>

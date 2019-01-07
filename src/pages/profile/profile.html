@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar color="dark">
       <ion-buttons left>
           <button ion-button icon-only (click)="openPage()">
             <ion-icon name="arrow-back"></ion-icon>
@@ -18,34 +18,34 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-item>
+<ion-content padding class="getting-started" style="background-color:rgb(37, 41, 41)">
+    <ion-item class="item item-trns text-center">
         <ion-label floating>First Name</ion-label>
         <ion-input [(ngModel)]="profile.firstName"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item class="item item-trns text-center">
           <ion-label floating>Last Name</ion-label>
           <ion-input [(ngModel)]="profile.lastName"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="item item-trns text-center">
             <ion-label floating>Email</ion-label>
             <ion-input [(ngModel)]="profile.email"></ion-input>
           </ion-item>
 
-          <ion-item>
+          <ion-item class="item item-trns text-center">
               <ion-label floating>Password</ion-label>
               <ion-input type="password" [(ngModel)]="profile.password"></ion-input>
             </ion-item>
 
-          <ion-item>
+          <ion-item class="item item-trns text-center">
               <ion-label floating>Telephone No.</ion-label>
               <ion-input [(ngModel)]="profile.telno"></ion-input>
             </ion-item>
 
           <div padding>
-              <button block ion-button (click)="createProfile()" item-left>Edit Profile</button>
+              <button block ion-button (click)="createProfile()" item-left color="danger">Edit Profile</button>
             </div>
 
 </ion-content>

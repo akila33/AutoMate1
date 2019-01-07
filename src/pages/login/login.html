@@ -1,10 +1,10 @@
 <ion-header>
-    <ion-navbar [hideBackButton]="true" color="primary">
+    <ion-navbar [hideBackButton]="true" color="dark">
       <ion-title>Login</ion-title>
     </ion-navbar>
   </ion-header>
   
-  <ion-content padding class="form-content" >
+  <ion-content padding class="form-content" class="getting-started" style="background-color:rgb(37, 41, 41)">
 
       <!-- <ion-img width="100" height="100" src="/../images/AutoMate.png"></ion-img> -->
 
@@ -17,7 +17,7 @@
 
     <form class="form" [formGroup]="validations_form"  (ngSubmit)="tryLogin(validations_form.value)">
   
-      <ion-item>
+      <ion-item class="item item-trns text-center">
         <ion-label floating color="primary">Email</ion-label>
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
@@ -30,7 +30,7 @@
         </ng-container>
       </div>
   
-      <ion-item>
+      <ion-item class="item item-trns text-center">
         <ion-label floating color="primary">Password</ion-label>
         <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
       </ion-item>
@@ -41,11 +41,11 @@
           </div>
         </ng-container>
       </div>
-  
+  <br>
       <button class="submit-btn" ion-button block type="submit" [disabled]="!validations_form.valid">Log In</button>
       <label class="error-message">{{errorMessage}}</label>
     </form>
-    <p class="go-to-register">
+    <p class="go-to-register" style="color:white">
       No account yet? <a (click)="goRegisterPage()">Create an account.</a>
     </p>
   </ion-content>

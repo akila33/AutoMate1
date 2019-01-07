@@ -12,9 +12,9 @@ import { map,catchError } from "rxjs/operators"
 @Injectable()
 export class VehicleServiceProvider {
 
-  private vehicleListUrl: string = "http://automate33.tk/service/vehicle/read.php";
-  private createVehicleUrl: string = "http://automate33.tk/service/vehicle/create.php";
-  private deleteVehicleUrl: string = "http://automate33.tk/service/vehicle/delete.php";
+  private vehicleListUrl: string = "http://automate33.ml/service/vehicle/read.php";
+  private createVehicleUrl: string = "http://automate33.ml/service/vehicle/create.php";
+  private deleteVehicleUrl: string = "http://automate33.ml/service/vehicle/delete.php";
 
   constructor(private http: Http) {
     console.log('Hello VehicleServiceProvider Provider');

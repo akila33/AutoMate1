@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="dark">
       <!-- <ion-buttons left>
           <button ion-button icon-only (click)="openPage(DashboardPage)">
             <ion-icon name="arrow-back"></ion-icon>
@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="form-content" class="getting-started">
+<ion-content padding class="form-content" class="getting-started" style="background-color:rgb(37, 41, 41)">
     <form #appointmentForm="ngForm" (ngSubmit)="createAppointment(appointmentForm.value)">
 
         <ion-item class="item item-trns text-center">
@@ -42,6 +42,17 @@
                 </ion-select>
 
           </ion-item>
+
+          <ion-item class="item item-trns text-center">
+            <ion-label>Service Type:</ion-label>
+    
+              <ion-select [(ngModel)]="appointment.serviceType" name="serviceType">
+                  <ion-option *ngFor="let problem of problems" value="{{problem.name}}">{{problem.name}}</ion-option>
+                 
+                </ion-select>
+    
+          </ion-item>
+
         <ion-item class="item item-trns text-center">
           <ion-label>Date</ion-label>
           <!-- <ion-input [(ngModel)]="appointment.date" name="date"></ion-input> -->
@@ -69,22 +80,13 @@
                 </ion-select>
             </ion-item> -->
 
-            <ion-item class="item item-trns text-center">
-              <ion-label>Service Type:</ion-label>
-      
-                <ion-select [(ngModel)]="appointment.serviceType" name="serviceType">
-                    <ion-option *ngFor="let problem of problems" value="{{problem.name}}">{{problem.name}}</ion-option>
-                   
-                  </ion-select>
-      
-            </ion-item>
 
-            <ion-item class="item item-trns text-center">
+            <!-- <ion-item class="item item-trns text-center"> -->
                 <!-- <ion-label>Estimated Cost</ion-label> -->
                 <!-- <ion-textarea [(ngModel)]="todo.engCapacity" name="engCapacity"></ion-textarea> -->
-              </ion-item>
-              <br>
-        <button ion-button type="submit" block >Request</button>
+              <!-- </ion-item> -->
+              <br><br>
+        <button ion-button type="submit" block color="danger">Request</button>
       </form>
     
   </ion-content>

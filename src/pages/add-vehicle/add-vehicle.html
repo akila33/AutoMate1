@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content class="getting-started">
+<ion-content class="getting-started" style="background-color:rgb(37, 41, 41)">
   <div *ngIf="isDataLoad">
     <ion-item *ngFor="let data of vehicleList" class="item item-trns text-center">
 
@@ -44,16 +44,15 @@
       </button>
     </ion-item>
 
-    <button ion-button large="false" on-click="addVehicle()" class="xbox">
-        <!-- <ion-icon name="add-circle" on-click="addVehicle()"></ion-icon> -->
-        Add Vehicle
-      </button>
-
   </div>
+
+  <button ion-button large="false" on-click="addVehicle()" class="xbox" color="danger">
+    <!-- <ion-icon name="add-circle" on-click="addVehicle()"></ion-icon> -->
+    Add Vehicle
+</button>
 
   <br>
   
-    
 
       <div *ngIf="isClicked">
           <ion-item class="item item-trns text-center">

@@ -12,9 +12,9 @@ import { map,catchError } from "rxjs/operators"
 @Injectable()
 export class UpcomingServiceProvider {
 
-  private upcomingListUrl: string = "http://automate33.tk/service/appointment/upcomingBookings.php";
-  private createUpcomingUrl: string = "http://automate33.tk/service/appointment/upcomingBookings.php";
-  private appointmentUrl:string = "http://automate33.tk/service/appointment/readEmergencyAppointment.php";
+  private upcomingListUrl: string = "http://automate33.ml/service/appointment/upcomingBookings.php";
+  private createUpcomingUrl: string = "http://automate33.ml/service/appointment/upcomingBookings.php";
+  private appointmentUrl:string = "http://automate33.ml/service/appointment/readEmergencyAppointment.php";
 
   constructor(private http: Http) {
     console.log('Hello UpcomingServiceProvider Provider');

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="dark">
       <!-- <ion-buttons left>
           <button ion-button icon-only (click)="openPage()">
             <ion-icon name="arrow-back"></ion-icon>
@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="form-content">
+<ion-content padding class="form-content" class="getting-started" style="background-color:rgb(37, 41, 41)">
   <!-- <form class="form" [formGroup]="validations_form"  (ngSubmit)="tryLogin(validations_form.value)">
 
     <ion-item>
@@ -44,12 +44,12 @@
   </form> -->
 
   <form  #vehicleForm="ngForm" (ngSubmit)="createVehicle(vehicleForm.value);">
-      <ion-item>
+      <ion-item class="item item-trns text-center"> 
         <ion-label>Vehicle number</ion-label>
         <ion-input type="text" [(ngModel)]="number" name="number"></ion-input>
       </ion-item>
       
-      <ion-item>
+      <ion-item class="item item-trns text-center">
           <ion-label>Brand</ion-label>
           <ion-select (ionChange)="setModelValues(sBrand)" [(ngModel)]="sBrand" name="brand">
             <!-- <ion-option value="Toyota">Toyota</ion-option>
@@ -68,24 +68,24 @@
       </ion-item>
 
       <!-- <ion-list *ngIf="selectedModels"> -->
-      <ion-item *ngIf="selectedModels">
+      <ion-item *ngIf="selectedModels" class="item item-trns text-center">
           <ion-label>Model</ion-label>
           <ion-select [(ngModel)]="sModel" name="model">
               <ion-option [value]="sModel" *ngFor="let sModel of selectedModels">{{sModel.name}}</ion-option>
             </ion-select>
         </ion-item>
        <!-- </ion-list>  -->
-        <ion-item>
+        <ion-item class="item item-trns text-center">
             <ion-label>Manufacture Year</ion-label>
             <ion-textarea [(ngModel)]="manYear" name="manYear"></ion-textarea>
           </ion-item>
-          <ion-item>
+          <ion-item class="item item-trns text-center">
               <ion-label>Engine Capacity</ion-label>
               <ion-textarea [(ngModel)]="engCapacity" name="engCapacity"></ion-textarea>
             </ion-item>
 
         <br>
-      <button ion-button type="submit" on-click="goToAddVehicle()">Add Vehicle</button>
+      <button ion-button type="submit" on-click="goToAddVehicle()" color="danger">Add Vehicle</button>
     </form>
   
 </ion-content>

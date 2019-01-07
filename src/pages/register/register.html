@@ -1,11 +1,11 @@
 
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-navbar color="dark">
       <ion-title>New Account</ion-title>
     </ion-navbar>
   </ion-header>
   
-  <ion-content padding class="form-content">
+  <ion-content padding class="form-content" class="getting-started" style="background-color:rgb(37, 41, 41)">
 
       <img src="http://licenciamentodesoftware.com.br/wp-content/uploads/2017/04/ft1.png" width="325" height="125">
     <br>
@@ -13,7 +13,7 @@
     <form class="form" [formGroup]="validations_form"  (ngSubmit)="tryRegister(validations_form.value)">
       
   
-      <ion-item>
+      <ion-item class="item item-trns text-center">
         <ion-label floating color="primary">Email</ion-label>
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
@@ -25,7 +25,7 @@
         </ng-container>
       </div>
   
-      <ion-item>
+      <ion-item class="item item-trns text-center">
         <ion-label floating color="primary">Password</ion-label>
         <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
       </ion-item>
@@ -36,12 +36,12 @@
           </div>
         </ng-container>
       </div>
-  
+  <br>
       <button class="submit-btn" ion-button block type="submit" [disabled]="!validations_form.valid">Register</button>
       <label class="error-message">{{errorMessage}}</label>
       <label class="success-message">{{successMessage}}</label>
     </form>
-    <p class="go-to-login">Already have an account? <a (click)="goLoginPage()">Try to Log In.</a></p>
+    <p class="go-to-login" style="color:white">Already have an account? <a (click)="goLoginPage()">Try to Log In.</a></p>
   
   </ion-content>
   

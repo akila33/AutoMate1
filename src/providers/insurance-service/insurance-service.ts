@@ -13,7 +13,7 @@ import { map,catchError } from "rxjs/operators"
 export class InsuranceServiceProvider {
 
   //private vehicleListUrl: string = "http://automate33.tk/service/vehicle/readUserVehicles.php";
-  private createInsuranceUrl: string = "http://automate33.tk/service/insurance/create.php";
+  private createInsuranceUrl: string = "http://automate33.ml/service/insurance/create.php";
   //private deleteVehicleUrl: string = "http://automate33.tk/service/vehicle/delete.php";
 
   constructor(private http: Http) {

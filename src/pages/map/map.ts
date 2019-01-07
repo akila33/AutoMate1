@@ -22,9 +22,10 @@ export class MapPage {
     }
 
     DisplayMap() {
-
-      const location = new google.maps.LatLng(6.9023,
-        79.8613);
+     let dimensions = JSON.parse(localStorage.getItem("dimensions"));
+     
+      const location = new google.maps.LatLng(dimensions.latitude,
+        dimensions.longitude);
 
       const options = {
         center:location,

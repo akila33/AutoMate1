@@ -12,7 +12,7 @@ import { map,catchError } from "rxjs/operators"
 @Injectable()
 export class EmergencyServiceProvider {
 
-  private serviceCenterListUrl: string = "http://automate33.tk/service/serviceCenters/readNearastCenters.php";
+  private serviceCenterListUrl: string = "http://automate33.ml/service/serviceCenters/readNearastCenters.php";
 
   constructor(private http: Http) {
     console.log('Hello AppointmentServiceProvider Provider');
