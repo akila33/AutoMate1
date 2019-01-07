@@ -1,0 +1,124 @@
+<!-- <ion-header>
+
+  <ion-navbar color="primary">
+      <ion-buttons left>
+          <button ion-button icon-only (click)="goToServices()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Add Service Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="form-content">
+    <form  #serviceForm="ngForm" (ngSubmit)="createService(serviceForm.value);">
+      <ion-item>
+          <ion-label>Service Center</ion-label>
+          <ion-input [(ngModel)]="serviceCenter" name="serviceCenter"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Service Type</ion-label>
+          <ion-input [(ngModel)]="serviceType" name="serviceType"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-input type="date" [(ngModel)]="date" name="date"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Time</ion-label>
+          <ion-input type="time" [(ngModel)]="time" name="time"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Rating</ion-label>
+          <ion-input [(ngModel)]="rating" name="rating"></ion-input>
+      </ion-item>
+      <br>
+      <button ion-button type="submit" on-click="goToServices()">Submit Service</button>
+    </form>
+</ion-content> -->
+
+
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goToServices()">
+              <ion-icon name="arrow-back"></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Add Service Details</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding class="form-content" class="getting-started">
+      <form #serviceForm="ngForm" (ngSubmit)="createService(serviceForm.value)">
+          <ion-item class="item item-trns text-center">
+              <ion-label>Service center</ion-label>
+              <!-- <ion-input [(ngModel)]="appointment.centerName" name="centerName"></ion-input> -->
+              <ion-select [(ngModel)]="serviceCenter" name="serviceCenter">
+                  <ion-option value="test">Auto Miraj</ion-option>
+                  <ion-option value="laughfs">Laughfs</ion-option>
+                  <ion-option value="caltex">Caltex Lanka</ion-option>
+                  <ion-option value="care">Car Care</ion-option>
+                  <ion-option value="kleen">Kleen Park</ion-option>
+                  <ion-option value="honda">Honda Service Center</ion-option>
+                  <ion-option value="toyota">Toyota Lanka Service Center</ion-option>
+                  <ion-option value="sterling">Sterling Aftercare</ion-option>
+                </ion-select>
+            </ion-item>
+          <ion-item class="item item-trns text-center">
+            <ion-label>Date</ion-label>
+            <!-- <ion-input [(ngModel)]="appointment.date" name="date"></ion-input> -->
+            <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="date" name="date"></ion-datetime>
+          </ion-item>
+          <!-- <span>e.g. YYYY-MM-DD</span> -->
+          <ion-item class="item item-trns text-center">
+            <ion-label>Time</ion-label>
+            <!-- <ion-input [(ngModel)]="appointment.time" name="time"></ion-input> -->
+            <ion-datetime displayFormat="HH:mm:A" [(ngModel)]="time" name="time"></ion-datetime>
+          </ion-item>
+          <!-- <span>e.g. HH:MM A.M</span> -->
+            <ion-item class="item item-trns text-center">
+                <ion-label>Service Type</ion-label>
+                <!-- <ion-input [(ngModel)]="appointment.serviceType" name="serviceType"></ion-input> -->
+                <ion-select [(ngModel)]="serviceType" name="serviceType">
+                    <ion-option value="accident">Accident</ion-option>
+                    <ion-option value="flatTire">Flat tire</ion-option>
+                    <ion-option value="crackedWindshield">Cracked Windshield</ion-option>
+                    <ion-option value="deadBattery">Dead battery</ion-option>
+                    <ion-option value="radiatorLeaks">Radiator leaks</ion-option>
+                    <ion-option value="faultyStarter">Faulty starter</ion-option>
+                    <ion-option value="tow">Need to tow</ion-option>
+                    <ion-option value="other">Other</ion-option>
+                  </ion-select>
+              </ion-item>
+
+              <ion-item class="item item-trns text-center">
+                <ion-label stacked>Additional Details</ion-label>
+                <ion-input type="text" placeholder="" [(ngModel)]="extraDetails" name="extraDetails"></ion-input>
+              </ion-item>
+
+
+
+              <!-- <ion-rating   (ionClick)="log($event)"  >
+
+              </ion-rating> -->
+
+
+              <ion-item class="item item-trns text-center">
+                <ion-label stacked>Review</ion-label>
+                <ion-input type="text" placeholder="" [(ngModel)]="review" name="review"></ion-input>
+              </ion-item>
+
+
+              <ion-item class="item item-trns text-center">
+                  <!-- <ion-label>Estimated Cost</ion-label> -->
+                  <!-- <ion-textarea [(ngModel)]="todo.engCapacity" name="engCapacity"></ion-textarea> -->
+                </ion-item>
+                <br>
+          <button ion-button type="submit" block >Submit Service</button>
+        </form>
+      
+    </ion-content>
+  

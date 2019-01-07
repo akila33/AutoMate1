@@ -1,0 +1,110 @@
+<!--
+  Generated template for the EmergencyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Emergency request</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="getting-started">
+
+    <div *ngIf="appointmentLoad">
+        <p *ngIf="appointment.isConfirmed=='0'" style="color:red">
+             Emergency Appoinment Not Confirmed Yet<br>
+             <strong>Appointment Id: {{appointment.appointmentID}}</strong>
+             <strong>Center Name: {{appointment.centerName}}</strong>
+             <strong>Date: {{appointment.date}}</strong>
+             <strong>Time: {{appointment.time}}</strong>
+             <strong>Service Type: {{appointment.serviceType}}</strong>
+          </p>
+         <p *ngIf="appointment.isConfirmed=='1'" style="color:green">
+             Emergency Appoinment Confirmed<br>
+             <strong>Appointment Id: {{appointment.appointmentID}}</strong>
+             <strong>Center Name: {{appointment.centerName}}</strong>
+             <strong>Date: {{appointment.date}}</strong>
+             <strong>Time: {{appointment.time}}</strong>
+             <strong>Service Type: {{appointment.serviceType}}</strong>
+         
+         </p>
+       </div>
+       
+  <br>
+    <!-- <ion-item class="item item-trns text-center">
+        <ion-label>Problem:</ion-label>
+        <ion-select [(ngModel)]="service" (ionChange)="onChange()">
+          <ion-option value="Roadside breakdown">Roadside breakdown</ion-option>
+          <ion-option value="Flat tyre">Flat tyre</ion-option>
+          <ion-option value="crackedWindshield">Cracked Windshield</ion-option>
+          <ion-option value="Dead battery">Dead battery</ion-option>
+          <ion-option value="radiatorLeaks">Radiator leaks</ion-option>
+          <ion-option value="faultyStarter">Faulty starter</ion-option>
+          <ion-option value="tow">Need to tow</ion-option>
+          <ion-option value="other">Other</ion-option>
+        </ion-select>
+      </ion-item> -->
+
+      <form #appointmentForm="ngForm" (ngSubmit)="presentConfirm(appointmentForm.value)">
+
+      <ion-item class="item item-trns text-center">
+        <ion-label>Problem:</ion-label>
+
+          <ion-select [(ngModel)]="service" name="serviceType"  (ionChange)="onChange()">
+              <ion-option *ngFor="let problem of problems" value="{{problem.name}}">{{problem.name}}</ion-option>
+             
+            </ion-select>
+
+      </ion-item>
+
+      <br><br>
+      <ion-item class="item item-trns text-center">
+          <ion-label color="primary" stacked>Additional details:</ion-label>
+          <ion-input type="text" placeholder=""></ion-input>
+        </ion-item>
+        <br>
+        
+        <!-- <br><br><br><br><br><br><br> -->
+        <!-- <button ion-button type="submit" on-click="presentConfirm()">Request</button> -->
+      
+        <!-- location -->
+
+        <div *ngIf="isDataLoad">
+            <h2 padding style="color:antiquewhite; font-family:Tahoma">Available service centres</h2>
+          <ion-item class="item item-trns text-center" *ngFor="let data of serviceCentersList" >
+              <h2>{{data.name}}</h2>
+              <!-- <p>Date: {{data.date}}</p> -->
+              
+              <!-- View Map -->
+              <button ion-button type="submit" on-click="goToMaps()">View Map</button>
+
+              <!-- Request Service -->
+          <button ion-button item-end type="submit" clear="true" large="false">
+              <!-- <ion-icon name="ios-arrow-forward" on-click="presentConfirm(data)"></ion-icon> -->
+              REQUEST
+            </button>
+          </ion-item>
+        </div>
+        
+          <!-- <button ion-button item-end clear="true" large="true">
+              <ion-icon name="add-circle" on-click="addService()"></ion-icon>
+            </button> -->
+      
+            <!-- <div *ngIf="isClicked">
+              <a (click)="closeDiv()">Back</a>
+                <ion-item>
+                <h2>Service Center :{{serviceCenter}}</h2>
+                <h2>Service Type :{{serviceType}}</h2>
+                
+               
+              </ion-item>
+              
+              </div> -->
+
+            </form>
+</ion-content>

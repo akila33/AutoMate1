@@ -1,0 +1,77 @@
+<!--
+  Generated template for the AddVehiclePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-buttons left>
+          <button ion-button icon-only (click)="openPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>My Vehicles</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="getting-started">
+  <div *ngIf="isDataLoad">
+    <ion-item *ngFor="let data of vehicleList" class="item item-trns text-center">
+
+      <!-- <div class="round"> -->
+        <!-- <ion-img width="250" height="250" src="car1.jpg"></ion-img> -->
+        <img src="https://www.dp-pics.com/pictures/whatsapp/cars/bmw-m-blue.jpg" class="w3-circle" height="80" width="80"/>
+      <!-- </div> -->
+        
+        <h2>{{data.brand}}</h2>
+        <p>{{data.model}}</p>
+
+      <!-- Delete button -->
+        <button ion-button item-end clear="true" large="false" on-click="removeData(data)"> 
+            <!-- <ion-icon name="ios-close-circle" on-click="removeData(data)"></ion-icon> -->
+            Remove
+          </button>
+
+        
+        
+    <button ion-button item-end clear="true" large="false" on-click="loadData(data)">
+        <!-- <ion-icon name="ios-arrow-forward" on-click="loadData(data)"></ion-icon> -->
+        View
+      </button>
+    </ion-item>
+
+    <button ion-button large="false" on-click="addVehicle()" class="xbox">
+        <!-- <ion-icon name="add-circle" on-click="addVehicle()"></ion-icon> -->
+        Add Vehicle
+      </button>
+
+  </div>
+
+  <br>
+  
+    
+
+      <div *ngIf="isClicked">
+          <ion-item class="item item-trns text-center">
+          <h1 style="font-family:verdana;">Vehicle Profile</h1><br>
+          <h2>Vehicle No :{{vehicleNo}}</h2>
+          <h3>Model: {{model}}</h3>
+          <h3>Brand: {{brand}}</h3>
+          <h4>Engine Capacity: {{engCapacity}}</h4>
+          <h4>Manufacture Year: {{manYear}}</h4>
+          
+          <br>
+         
+        </ion-item>
+
+        <a (click)="closeDiv()">Back</a>
+        
+        </div>
+  
+  
+  
+  </ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "AutoMate",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

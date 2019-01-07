@@ -1,0 +1,34 @@
+<!--
+  Generated template for the InsurancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="danger">
+      <ion-buttons left>
+          <button ion-button icon-only (click)="openPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Insurance details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="getting-started">
+    <br><br><br><br><br><br><br><br>
+  <ion-row>
+		<ion-card class="quick-action">
+			<ion-card-content >
+				<!-- <ion-icon name="mail"></ion-icon> -->
+				<span>Your Insurance will expire in 136 days</span>
+			</ion-card-content>
+		</ion-card>
+  </ion-row>
+  
+  <button ion-button type="submit" on-click="addInsurance()">Add Insurance</button>
+
+</ion-content>

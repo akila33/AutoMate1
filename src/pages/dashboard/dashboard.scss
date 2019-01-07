@@ -1,0 +1,49 @@
+page-dashboard {
+
+}
+
+.quick-action {
+    background-color:#1DA1F2; // black
+  }
+
+.getting-started{
+  background-image: url('../../assets/imgs/back4.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+ }
+
+.w3-circle{
+  border-radius: 50%;
+}
+
+.wrapper1 {
+  text-align: center;
+  //margin-left: 50px;
+  display:block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  //border: 1px ;
+}
+
+.wrapper2 {
+  text-align: center;
+  // margin-left: 10px;
+  display:block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1px ;
+}
+
+.button.customBtn{
+  width:320px;
+}
+
+.robot{
+  background-image: url('../../assets/imgs/car1.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+}

@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-navbar color="primary">
+      <!-- <ion-buttons left>
+          <button ion-button icon-only (click)="openPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons> -->
+    <ion-title>Add Vehicle</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="form-content">
+  <!-- <form class="form" [formGroup]="validations_form"  (ngSubmit)="tryLogin(validations_form.value)">
+
+    <ion-item>
+      <ion-label floating color="primary">Vehicle Number</ion-label>
+      <ion-input type="text" formControlName="vehicleNumber"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating color="primary">Brand</ion-label>
+      <ion-input type="text" formControlName="brand" class="form-controll" required></ion-input>
+    </ion-item>
+    
+
+    <ion-item>
+      <ion-label floating color="primary">Model</ion-label>
+      <ion-input type="text" formControlName="model" class="form-controll" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating color="primary">Manufacture Year</ion-label>
+      <ion-input type="text" formControlName="manYear" class="form-controll" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating color="primary">Engine Capacity</ion-label>
+      <ion-input type="text" formControlName="engCapacity" class="form-controll" required></ion-input>
+    </ion-item>
+    
+
+    <button class="submit-btn" ion-button block type="submit" [disabled]="!infoIdentityForm.valid">Add</button>
+    <label class="error-message">{{errorMessage}}</label>
+  </form> -->
+
+  <form  #vehicleForm="ngForm" (ngSubmit)="createVehicle(vehicleForm.value);">
+      <ion-item>
+        <ion-label>Vehicle number</ion-label>
+        <ion-input type="text" [(ngModel)]="number" name="number"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+          <ion-label>Brand</ion-label>
+          <ion-select (ionChange)="setModelValues(sBrand)" [(ngModel)]="sBrand" name="brand">
+            <!-- <ion-option value="Toyota">Toyota</ion-option>
+            <ion-option value="Nissan">Nissan</ion-option>
+            <ion-option value="Suzuki">Suzuki</ion-option>
+            <ion-option value="Kia">Kia</ion-option>
+            <ion-option value="Mitsubishi">Mitsubishi</ion-option>
+            <ion-option value="Mazda">Mazda</ion-option>
+            <ion-option value="Benz">Benz</ion-option>
+            <ion-option value="Audi">Audi</ion-option>
+            <ion-option value="BMW">BMW</ion-option>
+            <ion-option value="Subaru">Subaru</ion-option>
+            <ion-option value="TATA">TATA</ion-option> -->
+            <ion-option [value]="sBrand" *ngFor="let sBrand of brands">{{sBrand.name}}</ion-option>
+          </ion-select>
+      </ion-item>
+
+      <!-- <ion-list *ngIf="selectedModels"> -->
+      <ion-item *ngIf="selectedModels">
+          <ion-label>Model</ion-label>
+          <ion-select [(ngModel)]="sModel" name="model">
+              <ion-option [value]="sModel" *ngFor="let sModel of selectedModels">{{sModel.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+       <!-- </ion-list>  -->
+        <ion-item>
+            <ion-label>Manufacture Year</ion-label>
+            <ion-textarea [(ngModel)]="manYear" name="manYear"></ion-textarea>
+          </ion-item>
+          <ion-item>
+              <ion-label>Engine Capacity</ion-label>
+              <ion-textarea [(ngModel)]="engCapacity" name="engCapacity"></ion-textarea>
+            </ion-item>
+
+        <br>
+      <button ion-button type="submit" on-click="goToAddVehicle()">Add Vehicle</button>
+    </form>
+  
+</ion-content>
+
+
+
+
+
+
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+  <ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input type="text" #username></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" #password></ion-input>
+  </ion-item>
+
+</ion-list>
+
+<div padding>
+  <button block ion-button (click)="signInUser()" item-left>Sign In</button>
+</div>
+
+</ion-content> -->
+
+
