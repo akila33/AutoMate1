@@ -1,92 +1,65 @@
 <ion-header>
   <ion-navbar color="dark">
-      <!-- <ion-buttons left>
-          <button ion-button icon-only (click)="openPage(DashboardPage)">
-            <ion-icon name="arrow-back"></ion-icon>
-          </button>
-        </ion-buttons> -->
     <ion-title>Make an appointment</ion-title>
   </ion-navbar>
 </ion-header>
 
+<!-- Appointment Form -->
 <ion-content padding class="form-content" class="getting-started" style="background-color:rgb(37, 41, 41)">
     <form #appointmentForm="ngForm" (ngSubmit)="createAppointment(appointmentForm.value)">
 
+        <!-- Vehicle Selection -->
         <ion-item class="item item-trns text-center">
-            <ion-label>Select Vehicle</ion-label>
+            <ion-label>Select Vehicle:</ion-label>
 
               <ion-select [(ngModel)]="appointment.vehicleNo" name="vehicleNo">
                   <ion-option *ngFor="let vehicle of vehicles" value="{{vehicle.vehicleNo}}">{{vehicle.vehicleNo}}</ion-option>
-                 
-                </ion-select>
-                
-          </ion-item>
+              </ion-select>
+        </ion-item>
+        <br>
 
+        <!-- Service Centre Selection-->
         <ion-item class="item item-trns text-center">
-            <ion-label>Service center</ion-label>
-            
-            <!-- <ion-select [(ngModel)]="appointment.centerName" name="centerName">
-                <ion-option value="test">Auto Miraj</ion-option>
-                <ion-option value="laughfs">Laughfs</ion-option>
-                <ion-option value="caltex">Caltex Lanka</ion-option>
-                <ion-option value="care">Car Care</ion-option>
-                <ion-option value="kleen">Kleen Park</ion-option>
-                <ion-option value="honda">Honda Service Center</ion-option>
-                <ion-option value="toyota">Toyota Lanka Service Center</ion-option>
-                <ion-option value="sterling">Sterling Aftercare</ion-option>
-              </ion-select> -->
+            <ion-label>Service centre:</ion-label>
 
+              <!-- Load Service center list -->
               <ion-select [(ngModel)]="appointment.centerName" name="centerName">
                   <ion-option *ngFor="let serviceCenter of serviceCenters" [value]="serviceCenter">{{serviceCenter.name}}</ion-option>
-                 
-                </ion-select>
 
-          </ion-item>
+              </ion-select>
+        </ion-item>
+        <br>
 
-          <ion-item class="item item-trns text-center">
+        <!-- Service Type Selection -->
+        <ion-item class="item item-trns text-center">
             <ion-label>Service Type:</ion-label>
     
               <ion-select [(ngModel)]="appointment.serviceType" name="serviceType">
+                  <!-- Load Non-emergency services -->
                   <ion-option *ngFor="let problem of problems" value="{{problem.name}}">{{problem.name}}</ion-option>
-                 
-                </ion-select>
-    
-          </ion-item>
-
-        <ion-item class="item item-trns text-center">
-          <ion-label>Date</ion-label>
-          <!-- <ion-input [(ngModel)]="appointment.date" name="date"></ion-input> -->
-          <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="appointment.date" name="date"></ion-datetime>
+  
+              </ion-select>
         </ion-item>
-        <!-- <span>e.g. YYYY-MM-DD</span> -->
+        <br>
+
+        <!-- Date Selection -->
         <ion-item class="item item-trns text-center">
-          <ion-label>Time</ion-label>
-          <!-- <ion-input [(ngModel)]="appointment.time" name="time"></ion-input> -->
-          <ion-datetime displayFormat="HH:mm:A" [(ngModel)]="appointment.time" name="time"></ion-datetime>
+            <ion-label>Date:</ion-label>
+            
+            <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="appointment.date" name="date"></ion-datetime>
         </ion-item>
-        <!-- <span>e.g. HH:MM A.M</span> -->
+        <br>
 
-          <!-- <ion-item class="item item-trns text-center">
-              <ion-label>Service Type</ion-label>
-              <ion-select [(ngModel)]="appointment.serviceType" name="serviceType">
-                  <ion-option value="accident">Accident</ion-option>
-                  <ion-option value="flatTire">Flat tire</ion-option>
-                  <ion-option value="crackedWindshield">Cracked Windshield</ion-option>
-                  <ion-option value="deadBattery">Dead battery</ion-option>
-                  <ion-option value="radiatorLeaks">Radiator leaks</ion-option>
-                  <ion-option value="faultyStarter">Faulty starter</ion-option>
-                  <ion-option value="tow">Need to tow</ion-option>
-                  <ion-option value="other">Other</ion-option>
-                </ion-select>
-            </ion-item> -->
-
-
-            <!-- <ion-item class="item item-trns text-center"> -->
-                <!-- <ion-label>Estimated Cost</ion-label> -->
-                <!-- <ion-textarea [(ngModel)]="todo.engCapacity" name="engCapacity"></ion-textarea> -->
-              <!-- </ion-item> -->
-              <br><br>
+        <!-- Time Selection -->
+        <ion-item class="item item-trns text-center">
+            <ion-label>Time:</ion-label>
+            
+            <ion-datetime displayFormat="HH:mm:A" [(ngModel)]="appointment.time" name="time"></ion-datetime>
+        </ion-item>
+        
+        <br><br>
+        <!-- Request appointment -->
         <button ion-button type="submit" block color="danger">Request</button>
-      </form>
+    </form>
     
-  </ion-content>
+</ion-content>

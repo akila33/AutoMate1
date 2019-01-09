@@ -1,82 +1,81 @@
-<!--
-  Generated template for the EmergencyPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar color="dark">
     <ion-title>Emergency request</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding class="getting-started" style="background-color:rgb(37, 41, 41)">
 
+    <!-- Notifying weather the appointment is confirmend or not -->
     <div *ngIf="appointmentLoad">
-        <p *ngIf="appointment.isConfirmed=='0'" style="color:red; font-family: Verdana">
+        <p *ngIf="appointment.isConfirmed=='0'" style="color:red; font-family: Verdana; margin-left:15px;">
              Emergency Appoinment Not Confirmed Yet<br>
-             <strong>Appointment Id: {{appointment.appointmentID}}</strong>
-             <strong>Center Name: {{appointment.centerName}}</strong>
-             <strong>Date: {{appointment.date}}</strong>
-             <strong>Time: {{appointment.time}}</strong>
-             <strong>Service Type: {{appointment.serviceType}}</strong>
-          </p>
-         <p *ngIf="appointment.isConfirmed=='1'" style="color:green; font-family: Verdana">
+             <strong>Appointment Id: {{appointment.appointmentID}}</strong><br>
+             <strong>Center Name: {{appointment.centerName}}</strong><br>
+             <strong>Center Phone: {{appointment.centerphone}}</strong><br>
+             <strong>Date: {{appointment.date}}</strong><br>
+             <strong>Time: {{appointment.time}}</strong><br>
+             <strong>Service Type: {{appointment.serviceType}}</strong><br>
+        </p>
+        <p *ngIf="appointment.isConfirmed=='1'" style="color:green; font-family: Verdana; margin-left:15px;">
              Emergency Appoinment Confirmed<br>
-             <strong>Appointment Id: {{appointment.appointmentID}}</strong>
-             <strong>Center Name: {{appointment.centerName}}</strong>
-             <strong>Date: {{appointment.date}}</strong>
-             <strong>Time: {{appointment.time}}</strong>
-             <strong>Service Type: {{appointment.serviceType}}</strong>
+             <strong>Appointment Id: {{appointment.appointmentID}}</strong><br>
+             <strong>Center Name: {{appointment.centerName}}</strong><br>
+             <strong>Center Phone: {{appointment.centerphone}}</strong><br>
+             <strong>Date: {{appointment.date}}</strong><br>
+             <strong>Time: {{appointment.time}}</strong><br>
+             <strong>Service Type: {{appointment.serviceType}}</strong><br>
          
-         </p>
-       </div>
+        </p>
+    </div>
        
-  <br>
-    
+    <br>
 
-   
-      <ion-item class="item item-trns text-center">
+    <!-- Vehicle Selection -->
+    <ion-item class="item item-trns text-center">
+      <ion-label>Select Vehicle</ion-label>
+
+      <ion-select [(ngModel)]="vehicleNo" name="vehicleNo">
+          <ion-option *ngFor="let vehicle of vehicles" value="{{vehicle.vehicleNo}}">{{vehicle.vehicleNo}}</ion-option>
+      </ion-select>     
+    </ion-item>
+    <br>
+
+    <!-- Problem Selection -->
+    <ion-item class="item item-trns text-center">
         <ion-label>Problem:</ion-label>
 
-          <ion-select [(ngModel)]="service" name="serviceType"  (ionChange)="onChange()">
-              <ion-option *ngFor="let problem of problems" value="{{problem.name}}">{{problem.name}}</ion-option>
-             
-            </ion-select>
+        <ion-select [(ngModel)]="service" name="serviceType"  (ionChange)="onChange()">
+            <ion-option *ngFor="let problem of problems" value="{{problem.name}}">{{problem.name}}</ion-option>
+        </ion-select>
+    </ion-item>
 
-      </ion-item>
+    <br><br>
 
-      <br><br>
-      <ion-item class="item item-trns text-center">
-          <ion-label color="primary" stacked>Additional details:</ion-label>
-          <ion-input type="text" placeholder=""></ion-input>
-        </ion-item>
-        <br>
-        
-        <!-- <br><br><br><br><br><br><br> -->
-        <!-- <button ion-button type="submit" on-click="presentConfirm()">Request</button> -->
+    <!-- Additional Details -->
+    <ion-item class="item item-trns text-center">
+        <ion-label color="primary" stacked>Additional details:</ion-label>
+        <ion-input type="text" placeholder=""></ion-input>
+    </ion-item>
+    <br>
       
-        <!-- location -->
-
-        <div *ngIf="isDataLoad">
-            <h2 padding style="color:antiquewhite; font-family:Tahoma">Available service centres</h2>
-          <ion-item class="item item-trns text-center" *ngFor="let data of serviceCentersList" >
-              <h2>{{data.name}}</h2>
-              <p>{{data.phno}}</p>
-              <!-- <p>Date: {{data.date}}</p> -->
+    <!-- Available Service Centre List -->
+    <div *ngIf="isDataLoad">
+        <h2 padding style="color:antiquewhite; font-family:Tahoma">Available service centres</h2>
+        <ion-item class="item item-trns text-center" *ngFor="let data of serviceCentersList" >
+            <h2>{{data.name}}</h2>
+            <p>{{data.phno}}</p>
               
-              <!-- View Map -->
-              <button ion-button type="submit" on-click="goToMaps(data)">View Map</button>
+            <!-- View Map -->
+            <button ion-button type="submit" on-click="goToMaps(data)">View Map</button>
 
-              <!-- Request Service -->
-          <button ion-button item-end type="button" clear="true" large="false" (click)="presentConfirm(data)">
+            <!-- Request Service -->
+            <button ion-button item-end type="button" clear="true" large="false" (click)="presentConfirm(data)">
               REQUEST
             </button>
-          </ion-item>
-        </div>
+        </ion-item>
+    </div>
         
        
 </ion-content>

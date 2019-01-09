@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content padding class="getting-started">
+<ion-content padding style="background-color:rgb(37, 41, 41)" class="getting-started" >
 
   <!-- My Services -->
 
@@ -54,7 +54,13 @@
     <ion-item class="item item-trns text-center" *ngFor="let data of upcomingList" >
         <h2>Service Type :{{data.serviceType}}</h2>
         <p>Date: {{data.date}}</p>
-        
+     
+    <!-- Delete button -->
+    <button ion-button item-end clear="true" large="false" on-click="removeData(data)"> 
+      <!-- <ion-icon name="ios-close-circle" on-click="removeData(data)"></ion-icon> -->
+      Cancel
+    </button>
+
     <button ion-button item-end clear="true" on-click="loadData(data)">
         <!-- <ion-icon name="ios-arrow-forward" on-click="loadData(data)"></ion-icon> -->
         View

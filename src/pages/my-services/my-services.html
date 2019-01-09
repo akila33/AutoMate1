@@ -1,9 +1,3 @@
-<!--
-  Generated template for the MyServicesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="dark">
@@ -20,34 +14,7 @@
 
 <ion-content padding class="getting-started" style="background-color:rgb(37, 41, 41)">
 
-  <!-- Upcoming Services -->
-
-    <!-- <div *ngIf="isDataLoad">
-        <h1>Upcoming Services</h1>
-        <ion-item *ngFor="let data of upcomingList" >
-            <h2>Service Type :{{data.serviceType}}</h2>
-            <p>Date: {{data.date}}</p>
-            
-        <button ion-button item-end clear="true" large="true">
-            <ion-icon name="ios-arrow-forward" on-click="loadData1(data)"></ion-icon>
-          </button>
-        </ion-item>
-      </div>
-    
-          <div *ngIf="isClicked">
-            <a (click)="closeDiv()">Back</a>
-              <ion-item>
-              <h2>Service Center :{{serviceCenter}}</h2>
-              <h2>Service Type :{{serviceType}}</h2>
-              <p>Date: {{date}}</p>
-              <p>Time: {{time}}</p>
-             
-            </ion-item>
-            
-            </div> -->
-
-
-  <!-- Service History -->
+    <!-- Service History -->
   
 
     <div *ngIf="isDataServiceLoad">
@@ -57,28 +24,27 @@
             <p>Date: {{data.date}}</p>
             
         <button padding ion-button item-end clear="true" on-click="loadData2(data)">
-            <!-- <ion-icon name="ios-arrow-forward" on-click="loadData2(data)"></ion-icon> -->
             View
           </button>
         </ion-item>
-      </div>
-      <br><br>
         <button ion-button on-click="addService()" class="xbox" color="danger">
-            <!-- <ion-icon name="ios-add-circle" on-click="addService()"></ion-icon> -->
             Add Service
-          </button>
+        </button>
+    </div>
+    <br><br>
+        
     
           <div *ngIf="isServiceClicked">
             <a (click)="closeDiv()">Back</a>
               <ion-item class="item item-trns text-center">
-              <h2>Service Type :{{serviceType}}</h2>
-              <h2>Service Center :{{serviceCenter}}</h2>
-              <p>Date: {{date}}</p>
-              <p>Time: {{time}}</p>
-              <p>Rating: {{rating}}</p>
+                <h2>Service Type :{{serviceType}}</h2>
+                <h2>Service Center :{{serviceCenter}}</h2>
+                <p>Date: {{date}}</p>
+                <p>Time: {{time}}</p>
+                <p>Rating: {{rating}}</p>
              
-            </ion-item>
+              </ion-item>
             
-            </div>
+          </div>
       
 </ion-content>

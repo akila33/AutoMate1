@@ -6,12 +6,6 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { AddVehiclePage } from '../add-vehicle/add-vehicle';
 import { VehicleServiceProvider } from '../services/vehicle-service';
 import { Dropdown1, Dropdown2 } from './dropdown';
-/**
- * Generated class for the CarsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,63 +14,28 @@ import { Dropdown1, Dropdown2 } from './dropdown';
 })
 export class CarsPage {
 
-  //public brands: any[];
-  //public models: any[];
   public brands: Dropdown1[];
   public models: Dropdown2[];
-
   public selectedModels: any[];
-
-    public sModel: any;
-    //public id:any;
-
+  
+  public sModel: any;
   private menu: MenuController;
 
-	//@ViewChild(Nav) nav: Nav;
+  constructor(private formBuilder: FormBuilder, public navCtrl: NavController,
+    public navParams: NavParams,
+    public nav: Nav,private vehicleServiceProvider:VehicleServiceProvider) {
 
-  //todo = {}
-  // logForm() {
-  //   console.log(this.todo)
+      this.initializeState();
+      this.initializeDistrict();
 
-   
-
-
-
-  // }
-
-
-  // infoIdentityForm: FormGroup;
-  //     title : FormControl;
-  //     description : FormControl;
-       constructor(private formBuilder: FormBuilder, public navCtrl: NavController,
-        public navParams: NavParams,
-        public nav: Nav,private vehicleServiceProvider:VehicleServiceProvider) {
-
-          this.initializeState();
-        this.initializeDistrict();
-
-
-  //     this.title = new FormControl("", Validators.compose([Validators.required, Validators.minLength(5)]));
-  //     this.description = new FormControl();
-  //       this.infoIdentityForm = formBuilder.group({
-  //         title: this.title,
-  //         description: this.description
-  //       });
-  //       this.infoIdentityForm.valueChanges.subscribe(data=>this.todoOnDataChange(data));
-  //     }
-  //     todoOnDataChange(data: any): void {
-  //        console.log(data);
-  //     }
-      // logForm(){
-      //   console.log(this.infoIdentityForm.value)
-       }
+    }
 
        initializeState(){
         this.brands = [
             {id: '1', name: 'Toyota'},
             {id: '2', name: 'Nissan'},
             {id: '3', name: 'Kia'},
-            {id: '3', name: 'Suzuki'},
+            {id: '4', name: 'Suzuki'},
             {id: '3', name: 'Mitsubishi'},
             {id: '3', name: 'Mazda'},
             {id: '3', name: 'Benz'},
@@ -94,7 +53,9 @@ export class CarsPage {
             {id: '3', name: 'X-Trail', state_id: '2'},
             {id: '4', name: 'March', state_id: '2'},
             {id: '5', name: 'Sorento', state_id: '3'},
-            {id: '7', name: 'Picanto', state_id: '3'}
+            {id: '7', name: 'Picanto', state_id: '3'},
+            {id: '8', name: 'Alto', state_id: '4'},
+            {id: '9', name: 'Swift', state_id: '4'},
         ];
         }
 
@@ -107,13 +68,11 @@ export class CarsPage {
   }
 
   openPage() {
-		//this.menu.close();
-    //this.nav.setRoot(DashboardPage);
     this.navCtrl.push(DashboardPage);
-	}
+  }
+  
+  // Vehicle creation with custom object vehicle
   createVehicle(value){
-  //  console.log("retrieved value: "+value);
-       
     let vehicle = {
         "vehicleNo":value.number,
         "brand":value.brand.name,
@@ -121,24 +80,24 @@ export class CarsPage {
         "manYear":value.manYear,
         "engCapacity":value.engCapacity,
         "userId":1
-}
-console.log(vehicle);
-this.vehicleServiceProvider.createVehicle(vehicle).subscribe(
-  resultData => {
-    
-   console.log(resultData);
-   this.goToAddVehicle();
-   }, errordata => {
-   }
+    }
+    console.log(vehicle);
+    this.vehicleServiceProvider.createVehicle(vehicle).subscribe(
+      resultData => {
+        
+      console.log(resultData);
+      this.goToAddVehicle();
+      }, errordata => {
+      }
 
- );
+    );
 
+  }
 
-}
-
-goToAddVehicle(){
-  this.navCtrl.setRoot(AddVehiclePage);
-}
+  // Navigates to Add Vehicle Page
+  goToAddVehicle(){
+    this.navCtrl.setRoot(AddVehiclePage);
+  }
 
 
 }

@@ -3,12 +3,7 @@ import { HttpParams} from '@angular/common/http';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs";
 import { map,catchError } from "rxjs/operators"
-/*
-  Generated class for the VehicleServiceProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class EmergencyServiceProvider {
 
@@ -18,6 +13,7 @@ export class EmergencyServiceProvider {
     console.log('Hello AppointmentServiceProvider Provider');
   }
 
+  // Function to call nearest available service centre list
   findServiceCentersList(dimentions) {
     console.log("loadzVehicles");
     return this.http.post(this.serviceCenterListUrl,dimentions)
@@ -26,14 +22,6 @@ export class EmergencyServiceProvider {
       catchError(this.handleError));
   }
 
-
-//   createAppointment(appointment) {
-//     // console.log(employee);
-//       return this.http.post(this.createAppointmentUrl,appointment)
-//       .pipe(
-//         map(res => res.json()),
-//         catchError(this.handleError));
-//    }
 
   handleError(error: Response) {
     console.log(error);

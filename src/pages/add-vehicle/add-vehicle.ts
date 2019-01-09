@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams, Nav, MenuController, Navbar } from
 import { CarsPage } from '../cars/cars';
 import { DashboardPage } from '../dashboard/dashboard';
 import { VehicleServiceProvider } from '../services/vehicle-service';
-import { VehiclePage } from '../vehicle/vehicle';
-/**
- * Generated class for the AddVehiclePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -28,11 +21,7 @@ export class AddVehiclePage {
 
   ionViewDidLoad() {
     this.isClicked = false;
-//  console.log('Initial Loading ionViewDidLoad AddVehiclePage');
-//  this.nav.backButtonClick = () => {
-//   // Write here what you wanna do
-//   this.navCtrl.pop()
-//    };
+    // Load Vehicle List
     this.vehicleServiceProvider.findVehicleList().subscribe(
       resultData => {
          this.vehicleList = resultData.records;
@@ -46,24 +35,16 @@ export class AddVehiclePage {
 
   }
 
+  // Navigates to New Vehicle form
   addVehicle(){
     this.navCtrl.push(CarsPage);
   }
 
-  // setBackButtonAction(){
-  //   this.nav.backButtonClick = () => {
-  //   // Write here what you wanna do
-  //   this.navCtrl.pop()
-  //    }
-  //   }
-
   openPage() {
-		//this.menu.close();
     this.navCtrl.setRoot(DashboardPage);
-    //this.navCtrl.push(DashboardPage);
   }
   
-
+  // Load Vehicle Details
   loadData(data){
     this.isDataLoad = false;
     console.log(data);
@@ -72,27 +53,27 @@ export class AddVehiclePage {
     this.brand = data.brand;
     this.model = data.model;
     this.manYear = data.manYear;
-}
-
-removeData(data){
-  console.log(data.id);
-  let id={
-    "id":data.id
   }
-  this.vehicleServiceProvider.deleteVehicle(id).subscribe(
-    resultData => {
-     this.ionViewDidLoad();
-     console.log(this.vehicleList);
-     }, errordata => {
-     }
 
-   );
+  // Remove Vehicle
+  removeData(data){
+    console.log(data.id);
+    let id={
+      "id":data.id
+  }
+    this.vehicleServiceProvider.deleteVehicle(id).subscribe(
+      resultData => {
+      this.ionViewDidLoad();
+      console.log(this.vehicleList);
+      }, errordata => {
+      }
+    );
+  }
 
-}
-
-closeDiv(){
-  this.isClicked = false;
-  this.isDataLoad = true;
-}
+  // Back button function
+  closeDiv(){
+    this.isClicked = false;
+    this.isDataLoad = true;
+  }
 
 }

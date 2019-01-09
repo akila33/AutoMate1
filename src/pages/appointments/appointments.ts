@@ -77,6 +77,22 @@ export class AppointmentsPage {
     this.time = data.time;
 }
 
+removeData(data){
+  console.log(data.appointmentID);
+  let appointmentID={
+    "appointmentID":data.appointmentID
+  }
+  this.upcomingServiceProvider.deleteAppointment(appointmentID).subscribe(
+    resultData => {
+     this.ionViewDidLoad();
+     console.log(this.upcomingList);
+     }, errordata => {
+     }
+
+   );
+
+}
+
 closeDiv(){
   this.isClicked = false;
   this.isDataLoad = true;

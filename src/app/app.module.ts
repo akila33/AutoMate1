@@ -23,7 +23,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ProfilePage } from '../pages/profile/profile';
 import { AppointmentsPage } from '../pages/appointments/appointments';
 import { MyServicesPage } from '../pages/my-services/my-services';
-import { InsurancePage } from '../pages/insurance/insurance';
+//import { InsurancePage } from '../pages/insurance/insurance';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { environment } from '../environment/environment';
@@ -35,7 +35,7 @@ import { AuthService } from '../pages/services/auth.service';
 import { NonEmergencyPage } from '../pages/non-emergency/non-emergency';
 import { AddVehiclePage } from '../pages/add-vehicle/add-vehicle';
 import { AddServicePage } from '../pages/add-service/add-service';
-import { AddInsurancePage } from '../pages/add-insurance/add-insurance';
+//import { AddInsurancePage } from '../pages/add-insurance/add-insurance';
 import { OurServicesPage } from '../pages/our-services/our-services';
 import { AboutPage } from '../pages/about/about';
 
@@ -52,6 +52,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { InsuranceServiceProvider } from '../providers/insurance-service/insurance-service';
 import { ServiceCentersServiceProvider } from '../providers/service-centers-service/service-centers-service';
 import { ProblemsServiceProvider } from '../providers/problems-service/problems-service';
+import { ProfileServiceProvider } from '../providers/profile-service/profile-service';
 
 
 
@@ -73,8 +74,6 @@ import { ProblemsServiceProvider } from '../providers/problems-service/problems-
     MapPage,
     AddVehiclePage,
     AddServicePage,
-    AddInsurancePage,
-    InsurancePage,
     OurServicesPage,
     AboutPage
   ],
@@ -107,8 +106,6 @@ import { ProblemsServiceProvider } from '../providers/problems-service/problems-
     MapPage,
     AddVehiclePage,
     AddServicePage,
-    AddInsurancePage,
-    InsurancePage,
     OurServicesPage,
     AboutPage
   ],
@@ -130,7 +127,8 @@ import { ProblemsServiceProvider } from '../providers/problems-service/problems-
     InsuranceServiceProvider,
     InsuranceServiceProvider,
     ServiceCentersServiceProvider,
-    ProblemsServiceProvider
+    ProblemsServiceProvider,
+    ProfileServiceProvider
   ]
 })
 export class AppModule {}

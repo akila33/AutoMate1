@@ -8,15 +8,10 @@ import { Geolocation,  Geoposition } from '@ionic-native/geolocation';
 
 import { AppointmentServiceProvider } from '../services/appointment-service';
 import { ProblemsServiceProvider } from '../../providers/problems-service/problems-service';
-//import { filter } from 'rxjs/operators';
 import { UpcomingServiceProvider } from '../services/upcoming-service';
+import { VehicleServiceProvider } from '../services/vehicle-service';
 import * as firebase from 'firebase/app';
-/**
- * Generated class for the EmergencyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -28,195 +23,194 @@ export class EmergencyPage {
   private serviceCentersList;
   private problemsList;
   private menu: MenuController;
-  name;service;
+  name;service;vehicleNo;
   dimentions:any= [];
+  vehicles :any = [];
+  problems :any = [];
+
   @ViewChild(Nav) nav: Nav;
   isClicked:boolean = false;
   isDataLoad:boolean = false;
-
-  problems :any = [];
 
   appointment;
   appointmentLoad:boolean = false;
   latitute;
   longitude;
-  //serviceCenters :any = [];
 
   constructor(public navCtrl: NavController,private appointmentServiceProvider:AppointmentServiceProvider, public navParams: NavParams,
      private alertCtrl: AlertController, private geolocation: Geolocation,
      private emergencyServiceProvider:EmergencyServiceProvider,private auth: AuthService,
      private problemServiceProvider:ProblemsServiceProvider,
+     private vehicleServiceProvider:VehicleServiceProvider,
      private upcomingAppointmentServiceProvider:UpcomingServiceProvider) {
-
-  //   setInterval(() => {
-  //     this.loadDashboardData();
-  // }, 2000);
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EmergencyPage');
-  //  console.log(this.auth.getEmail());
-      this.loadProblems();
+    // Loading Problem list and Vehicle list
+    this.loadProblems();
+    this.loadVehicles();
      
+    // Get the current position of the device
     this.geolocation.getCurrentPosition().then((resp) => {
-      this.latitute = resp.coords.latitude;
-      this.longitude =resp.coords.longitude;
+        this.latitute = resp.coords.latitude;
+        this.longitude =resp.coords.longitude;
+        }).catch((error) => {
+          console.log('Error getting location', error);
+        });
+        
+        let watch = this.geolocation.watchPosition();
+        watch.subscribe((data) => {
+        });
 
-    
-
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
-     
-     let watch = this.geolocation.watchPosition();
-     watch.subscribe((data) => {
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
-     });
-
-     var subscription = this.geolocation.watchPosition().subscribe(position => {
-      if ((position as Geoposition).coords != undefined) {
-        var geoposition = (position as Geoposition);
-       console.log('Latitude: ' + geoposition.coords.latitude + ' - Longitude: ' + geoposition.coords.longitude);
-        this.dimentions =  {
-          "latitude":geoposition.coords.latitude,
-          "longitude":geoposition.coords.longitude
-         };
-         console.log(this.dimentions);
+    // Handler function that will be called automatically each time the position of the device changes
+    var subscription = this.geolocation.watchPosition().subscribe(position => {
+        if ((position as Geoposition).coords != undefined) {
+          var geoposition = (position as Geoposition);
+          console.log('Latitude: ' + geoposition.coords.latitude + ' - Longitude: ' + geoposition.coords.longitude);
+          // Assigning dimensions using devices' current location
+          this.dimentions =  {
+            "latitude":geoposition.coords.latitude,
+            "longitude":geoposition.coords.longitude
+          };
+          console.log(this.dimentions);
       
-       } 
+        } 
     
-  });
+    });
 
-    this.isClicked = false;
-    
-    
-
-    
+    this.isClicked = false;    
   }
 
+  // Function which loads the Service Centre list
   clickService(){
     let currentDimentions = this.dimentions;
 
+    // Assigning parameters to find the nearest service centers
     let dimentions = {
-          "latitude":currentDimentions.latitude,
-          "longitude":currentDimentions.longitude,
-          "service":this.service
-
+        "latitude":currentDimentions.latitude,
+        "longitude":currentDimentions.longitude,
+        "service":this.service,
+        "vehicleNo":this.vehicleNo
     }
+
     console.log(dimentions);
 
     this.emergencyServiceProvider.findServiceCentersList(dimentions).subscribe(
-      resultData => {
-         this.serviceCentersList = resultData.records;
-         this.isDataLoad = true;
-       console.log(this.serviceCentersList);
-       }, errordata => {
-       }
-
-     );
-
-
-
-  }
-onChange(){
-  console.log("ok");
- this.clickService();
-}
-
-presentConfirm(value) {
-  let currentUser = firebase.auth().currentUser;
-  let alert = this.alertCtrl.create({
-    title: 'Confirm request',
-    message: 'Request service?',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
+        resultData => {
+          this.serviceCentersList = resultData.records;
+          this.isDataLoad = true;
+        console.log(this.serviceCentersList);
+        }, errordata => {
         }
-      },
-      {
-        text: 'Confirm',
-        handler: () => {
-          //console.log('Buy clicked');
+    );
+  }
 
-          this.isDataLoad = false;
-          console.log(value);
-          let now = new Date();
-          let date = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
-          let time =  now.getHours()+":"+now.getMinutes();
-          
-          let appointment ={
-            "centerName": value.name,
-            "date": date,
-            "serviceType": this.service,
-            "time":time,
-            "centerEmail":value.email,
-            "userEmail":this.auth.getEmail(),
-            "centerphone":value.phno,
-            "userlocation":this.latitute+","+this.longitude,
-            "centerlocation":value.latitude+","+value.longitude,
-            "isEmergency": 1
+  // Calling clickService() function
+  onChange(){
+    this.clickService();
+  }
+
+  // Clicked REQUEST button
+  // Emregency appointment creation
+  presentConfirm(value) {
+    let currentUser = firebase.auth().currentUser;
+    let alert = this.alertCtrl.create({
+      title: 'Confirm request',
+      message: 'Request service?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: () => {
+
+            this.isDataLoad = false;
+            console.log(value);
+            let now = new Date();
+            let date = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
+            let time =  now.getHours()+":"+now.getMinutes();
+           
+            // Assign values for typescript custom object appointment
+            let appointment ={
+              "vehicleNo":this.vehicleNo,
+              "centerName":value.name,
+              "date": date,
+              "serviceType":this.service,
+              "time":time,
+              "centerEmail":value.email,
+              "userEmail":this.auth.getEmail(),
+              "centerphone":value.phno,
+              "userlocation":this.latitute+","+this.longitude,
+              "centerlocation":value.latitude+","+value.longitude,
+              "isEmergency": 1
             }
 
+            // Creating the emergency service appointment
             this.appointmentServiceProvider.createAppointment(appointment).subscribe(
               resultData => {
                 this.loadLatestAppointment();
                 this.loadLatestAppointmentPerTime();
-             
-              console.log(resultData);
-          //     this.goToDashboard();
+              
+                console.log(resultData);
               }, errordata => {
               }
-            
+              
             );
 
-          this.isClicked = true;
-          this.name = value.name;
+            this.isClicked = true;
+            this.name = value.name;
 
+          }
         }
-      }
-    ]
-  });
-  alert.present();
-}
+      ]
+    });
+    alert.present();
+  }
 
 
-closeDiv(){
-  this.isClicked = false;
-  this.isDataLoad = true;
-}
+  closeDiv(){
+    this.isClicked = false;
+    this.isDataLoad = true;
+  }
 
+  // Navigating to Maps Page
   goToMaps(value){
-   // console.log(value);
-   
+    // Setting a localstorage to parse latitude and longitude of the service centre in order to view the map
     localStorage.setItem('dimensions', JSON.stringify({ latitude: value.latitude,longitude: value.longitude }));
-           
     this.navCtrl.push(MapPage);
   }
 
-  
-loadDashboardData(){
-  console.log("poeep");
-}
-
-
-loadProblems(){
-
-  this.problemServiceProvider.findProblemList().subscribe(
-    resultData => {
-      this.problems = resultData.records;
-     console.log(this.problems);
-     
-      }, errordata => {
-      }
-  )
+  // Function for loading emergency services list
+  loadProblems(){
+    this.problemServiceProvider.findProblemList().subscribe(
+      resultData => {
+        this.problems = resultData.records;
+      console.log(this.problems);
+      
+        }, errordata => {
+        }
+    )
   }
 
+  // Functions for loading user vahicle list
+  loadVehicles(){
+    this.vehicleServiceProvider.findVehicleList().subscribe(
+      resultData => {
+        this.vehicles = resultData.records;
+        console.log(this.vehicles);
+        }, errordata => {
+        }
+    )
+  }
+
+  // Function for loading the latest emergency appointment in order to check the status
   loadLatestAppointment(){
     let currentUser = firebase.auth().currentUser;
     let user = {
@@ -231,20 +225,14 @@ loadProblems(){
 
           }
     );
-
-
   }
 
+  // Function to set the interval for component refesh
   loadLatestAppointmentPerTime() {
     setInterval(() => {
      this.loadLatestAppointment();
-    }, 60000);
+    }, 1000);
 
   }
   
-  
-
-
-  
-
 }

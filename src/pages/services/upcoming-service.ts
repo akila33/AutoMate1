@@ -15,6 +15,7 @@ export class UpcomingServiceProvider {
   private upcomingListUrl: string = "http://automate33.ml/service/appointment/upcomingBookings.php";
   private createUpcomingUrl: string = "http://automate33.ml/service/appointment/upcomingBookings.php";
   private appointmentUrl:string = "http://automate33.ml/service/appointment/readEmergencyAppointment.php";
+  private deleteAppointmentUrl:string = "http://automate33.ml/service/appointment/delete.php";
 
   constructor(private http: Http) {
     console.log('Hello UpcomingServiceProvider Provider');
@@ -36,6 +37,14 @@ export class UpcomingServiceProvider {
         map(res => res.json()),
         catchError(this.handleError));
    }
+
+   deleteAppointment(appointment) {
+    console.log(appointment);
+     return this.http.post(this.deleteAppointmentUrl,appointment)
+     .pipe(
+       map(res => res.json()),
+       catchError(this.handleError));
+  }
 
    findLatestEmergencyAppointment(userData){
     return this.http.post(this.appointmentUrl,userData)
